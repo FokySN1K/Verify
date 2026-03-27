@@ -1,7 +1,7 @@
 create table client
 (
     id int8 generated always as identity,
-    front_id int8,
+    client_id int8,
     name varchar(40),
     surname varchar(40),
     email varchar(50),
