@@ -253,3 +253,7 @@ buildNumber.properties
 # JDT-specific (Eclipse Java Development Tools)
 
 # End of https://www.toptal.com/developers/gitignore/api/java,maven,intellij+all,intellij
+/verify_backend/mvnw
+/verify_backend/mvnw.cmd
+/verify_backend/.gitattributes
+/verify_backend/.mvn/

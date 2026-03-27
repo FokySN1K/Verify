@@ -1,0 +1,22 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: verify_backend
+
+  jdbc:
+    template:
+      query-timeout: 30000
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/verify
+    username: verify
+    password: verify
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 10
+      pool-name: verify_pool
+      minimum-idle: 10
+
