@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+    <!-- Добавление статусов заказа, xml, xsd-->
+    <include file="changelog/create_contract_status_enum.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/create_xml_status_enum.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/create_xsd_status_enum.xml" relativeToChangelogFile="true"/>
+
+    <!-- Добавление ключевых таблиц -->
+    <include file="changelog/create_client_table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/create_contract_table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/create_tender_table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/create_xsd_table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/create_xml_table.xml" relativeToChangelogFile="true"/>
+
+</databaseChangeLog>
