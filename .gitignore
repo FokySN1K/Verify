@@ -257,3 +257,5 @@ buildNumber.properties
 /verify_backend/mvnw.cmd
 /verify_backend/.gitattributes
 /verify_backend/.mvn/
+/verify_backend/tmp/
+/verify_database/.mvn/

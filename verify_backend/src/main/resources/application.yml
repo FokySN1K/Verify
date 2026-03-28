@@ -2,6 +2,7 @@ server:
   port: 8080
 
 spring:
+
   application:
     name: verify_backend
 
@@ -19,4 +20,13 @@ spring:
       maximum-pool-size: 10
       pool-name: verify_pool
       minimum-idle: 10
+
+  servlet:
+    multipart:
+      enabled: true
+      location: ${user.dir}/tmp/uploads
+      file-size-threshold: 10MB
+      max-file-size: 50MB
+      resolve-lazily: false
+
 

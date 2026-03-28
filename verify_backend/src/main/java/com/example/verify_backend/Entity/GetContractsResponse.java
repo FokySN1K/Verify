@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class GetContractsResponse {
+public class GetContractsResponse extends Result {
 
     @JsonProperty("name")
     private String name;
