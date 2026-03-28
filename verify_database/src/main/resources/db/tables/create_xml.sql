@@ -1,7 +1,7 @@
 create table xml
 (
     id int8 generated always as identity,
-    name varchar(50),
+    name text,
     contract_id int8,
     xsd_id int8,
     status xml_status,
