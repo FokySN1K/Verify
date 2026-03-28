@@ -1,4 +1,4 @@
-package com.example.verify_backend.Entity;
+package com.example.verify_backend.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
@@ -11,8 +11,8 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class GetContractsRequest {
 
-    @JsonProperty("front_id")
+    @JsonProperty("client_id")
     @NotNull
-    private Long front_id;
+    private String client_id;
 
 }

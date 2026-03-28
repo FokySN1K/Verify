@@ -1,11 +1,11 @@
-package com.example.verify_backend.Service;
+package com.example.verify_backend.Service.Validation;
 
-import com.example.verify_backend.Entity.ValidateWithXsdFilesResponse;
+import com.example.verify_backend.dto.ValidateWithXsdDataRequest;
+import com.example.verify_backend.dto.ValidateWithXsdDataResponse;
 import com.example.verify_backend.Exception.ValidationXmlException;
 import com.example.verify_backend.UtilService.XmlValidateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
@@ -14,23 +14,23 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ValidateWithXsdFilesService {
+public class ValidateWithXsdDataService {
 
     private final XmlValidateService xmlValidateService;
 
-    public ValidateWithXsdFilesResponse validateWithXsdFilesService(MultipartFile xml, MultipartFile xsd) {
+    public ValidateWithXsdDataResponse validateWithXsdData(ValidateWithXsdDataRequest request) {
 
         List<SAXParseException> exceptionList;
 
         try {
-            exceptionList = xmlValidateService.validate(xml.getInputStream(), xsd.getInputStream());
+            exceptionList = xmlValidateService.validate(request.getXmlData(), request.getXsdData());
         } catch (IOException e) {
             throw new ValidationXmlException("Ошибка при чтении файла");
         } catch (SAXException e) {
             throw new ValidationXmlException("Ошибка при чтении файла. Формат некорретен");
         }
 
-        return new ValidateWithXsdFilesResponse()
+        return new ValidateWithXsdDataResponse()
                 .setExceptionList(exceptionList.stream().map(SAXParseException::toString).toList());
 
     }

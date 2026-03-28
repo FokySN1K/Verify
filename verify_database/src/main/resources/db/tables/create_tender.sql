@@ -11,7 +11,7 @@ create table tender
 
 
 -- create index
-create index tender_contract_id_contractor_id_idx on tender(contract_id, contractor_id);
+create unique index tender_contract_id_contractor_id_idx on tender(contract_id, contractor_id);
 
 
 -- comment

@@ -1,4 +1,4 @@
-package com.example.verify_backend.Entity;
+package com.example.verify_backend.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -2,15 +2,13 @@ package com.example.verify_backend.Repository.Query;
 
 import com.example.verify_backend.UtilService.FileReaderService;
 
-public enum ContractQuery implements Query{
-
-    CREATE_CONTRACT("/sql/create_contract.sql"),
-    GET_CONTRACTS("/sql/get_contracts.sql"),
+public enum ClientQuery implements Query{
+    CREATE_CLIENT("/sql/create_client.sql")
     ;
 
     private final String query;
 
-    ContractQuery(String path) {
+    ClientQuery(String path) {
         this.query = FileReaderService.readFileFromResources(path);
     }
 
@@ -18,4 +16,5 @@ public enum ContractQuery implements Query{
     public String getQuery() {
         return query;
     }
+
 }

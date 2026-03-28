@@ -9,3 +9,5 @@ create table client
     --
     constraint client_id_pk primary key (id)
 );
+
+create unique index client_client_id_unique_idx on client(client_id);

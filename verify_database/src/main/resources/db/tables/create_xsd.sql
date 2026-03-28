@@ -10,5 +10,6 @@ create table xsd
     link varchar(100),
     version int8,
     --
-    constraint xsd_id_pk primary key (id)
+    constraint xsd_id_pk primary key (id),
+    constraint xsd_name_version_unique unique (name, version)
 );

@@ -10,6 +10,9 @@ create table contract
     --
     constraint contract_id_pk primary key (id),
     constraint contract_customer_id_fk foreign key (customer_id) references client(id),
-    constraint contract_contractor_id_fk foreign key (contractor_id) references client(id)
+    constraint contract_contractor_id_fk foreign key (contractor_id) references client(id),
+    constraint contract_customer_id_name_unique unique (customer_id, name);
 );
 
+create index contract_customer_id_idx on contract(customer_id);
+create index contract_contractor_id_idx on contract(contractor_id);

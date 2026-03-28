@@ -8,4 +8,16 @@ public enum ContractStatus {
     FAILED,
     ;
 
+    public static ContractStatus fromStringSafe(String status) {
+        if (status == null || status.isBlank()) {
+            return null;
+        }
+
+        try {
+            return ContractStatus.valueOf(status.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
+    }
+
 }

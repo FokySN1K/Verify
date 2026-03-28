@@ -1,6 +1,6 @@
 package com.example.verify_backend.Config;
 
-import com.example.verify_backend.Entity.Result;
+import com.example.verify_backend.dto.Result;
 import com.example.verify_backend.Exception.ValidationXmlException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
