@@ -7,12 +7,13 @@ create table xml
     status xml_status,
     version int8,
     data xml,
+    reason text,
     created_ts timestamp default current_timestamp,
     --
     constraint xml_id_pk primary key (id),
     constraint xml_contract_id_fk foreign key (contract_id) references contract(id),
     constraint xml_xsd_id_fk foreign key (xsd_id) references xsd(id),
-    constraint xml_xsd_id_version_unique unique (xsd_id, version)
+    constraint xml_order_id_xsd_id_version_unique unique (order_id, xsd_id, version)
 );
 
 create index xml_contract_id_idx on xml(contract_id);

@@ -1,7 +1,6 @@
 package com.example.verify_backend.dto;
 
 import com.example.verify_backend.Entity.Contract;
-import com.example.verify_backend.Enums.ContractStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
