@@ -9,6 +9,7 @@
     <include file="changelog/create_contract_status_enum.xml" relativeToChangelogFile="true"/>
     <include file="changelog/create_xml_status_enum.xml" relativeToChangelogFile="true"/>
     <include file="changelog/create_xsd_status_enum.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/create_client_role_enum.xml" relativeToChangelogFile="true"/>
 
     <!-- Добавление ключевых таблиц -->
     <include file="changelog/create_client_table.xml" relativeToChangelogFile="true"/>
