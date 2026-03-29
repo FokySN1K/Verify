@@ -18,4 +18,15 @@
     <include file="changelog/create_xsd_table.xml" relativeToChangelogFile="true"/>
     <include file="changelog/create_xml_table.xml" relativeToChangelogFile="true"/>
 
+    <!-- Testing data-->
+    <include file="changelog/testing/xsd_001.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/testing/xsd_002.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/testing/xsd_003.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/testing/xsd_004.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/testing/xsd_005.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/testing/xsd_006.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/testing/xsd_007.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/testing/xsd_008.xml" relativeToChangelogFile="true"/>
+
+
 </databaseChangeLog>
