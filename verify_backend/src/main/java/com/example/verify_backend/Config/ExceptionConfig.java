@@ -41,4 +41,16 @@ public class ExceptionConfig {
                 .body(result);
     }
 
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Result> handleException(IllegalArgumentException exception) {
+        Result result = new Result()
+                .setCode(HttpStatus.BAD_REQUEST.value())
+                .setMessage(exception.getMessage());
+
+        return ResponseEntity
+                .badRequest()
+                .body(result);
+    }
+
 }
