@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 
@@ -39,6 +40,15 @@ public class ExceptionConfig {
         return ResponseEntity
                 .badRequest()
                 .body(result);
+    }
+
+    @ExceptionHandler(HttpClientErrorException.class)
+    public ResponseEntity<Result> handleException(HttpClientErrorException e) {
+        Result result = new Result()
+                .setCode(e.getStatusCode().value())
+                .setMessage(e.getMessage());
+
+        return ResponseEntity.status(e.getStatusCode()).body(result);
     }
 
 }

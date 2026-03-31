@@ -2,15 +2,17 @@ package com.example.verify_backend.Repository.Query;
 
 import com.example.verify_backend.UtilService.FileReaderService;
 
-public enum ClientQuery implements Query {
-    CREATE_CLIENT("/sql/create_client.sql")
-    ;
+public enum XmlQuery implements Query {
+
+    GET_LIGHT_XML("/sql/get_light_xml.sql"),
+    GET_XML("/sql/get_xml.sql"),;
 
     private final String query;
 
-    ClientQuery(String path) {
-        this.query = FileReaderService.readFileFromResources(path);
+    XmlQuery(String query) {
+        this.query = FileReaderService.readFileFromResources(query);
     }
+
 
     @Override
     public String getQuery() {
