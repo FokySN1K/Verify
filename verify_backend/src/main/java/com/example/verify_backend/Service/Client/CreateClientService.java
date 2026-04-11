@@ -15,6 +15,7 @@ public class CreateClientService {
 
     public Result createClient(CreateClientRequest request) {
 
+        // TODO Лучше map struct, разве нет?
         // TODO переписать на маппер
         Client client = new Client()
                 .setClientId(request.getClientId())

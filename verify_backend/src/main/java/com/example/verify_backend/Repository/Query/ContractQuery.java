@@ -2,7 +2,7 @@ package com.example.verify_backend.Repository.Query;
 
 import com.example.verify_backend.UtilService.FileReaderService;
 
-public enum ContractQuery implements Query{
+public enum ContractQuery implements Query {
 
     CREATE_CONTRACT("/sql/create_contract.sql"),
     GET_CONTRACTS("/sql/get_contracts.sql"),
