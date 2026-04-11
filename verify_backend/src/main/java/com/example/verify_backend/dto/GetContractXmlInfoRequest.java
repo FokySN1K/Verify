@@ -1,9 +1,10 @@
 package com.example.verify_backend.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import org.jspecify.annotations.NonNull;
 import tools.jackson.databind.PropertyNamingStrategies;
 import tools.jackson.databind.annotation.JsonNaming;
 
@@ -13,12 +14,14 @@ public record GetContractXmlInfoRequest(
         @Schema(name = "client_id")
         String clientId,
 
-        @Min(1)
+        @Positive
         @Schema(name = "order_id")
-        long orderId,
+        @NonNull
+        Long orderId,
 
-        @Min(1)
+        @Positive
         @Schema(name = "xml_id")
-        long xmlId
+        @NonNull
+        Long xmlId
 ) {
 }

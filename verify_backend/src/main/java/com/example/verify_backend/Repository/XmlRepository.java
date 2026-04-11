@@ -2,9 +2,10 @@ package com.example.verify_backend.Repository;
 
 import com.example.verify_backend.Entity.XmlEntity;
 import com.example.verify_backend.Repository.Query.XmlQuery;
-import com.example.verify_backend.Repository.RowMapper.XmlRowMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -18,9 +19,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class XmlRepository {
 
-    private final NamedParameterJdbcTemplate jdbcTemplate;
+    private final RowMapper<XmlEntity> xmlRowMapper = new BeanPropertyRowMapper<>(XmlEntity.class);
 
-    private final XmlRowMapper xmlRowMapper;
+    private final NamedParameterJdbcTemplate jdbcTemplate;
 
     public List<XmlEntity> findAllByClientIdAndContractId(String clientId,
                                                           Long contractId) {
