@@ -18,4 +18,8 @@ public class AddNewXmlVersionRequest {
     private Long contractId;
 
     private String clientId;
+
+    private String xmlData;
+
+    private String reason;
 }

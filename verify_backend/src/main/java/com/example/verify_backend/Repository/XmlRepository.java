@@ -79,7 +79,7 @@ public class XmlRepository {
      *
      * !!!! Перед вызовом метода обязательно вызываем получение XmlInfoLight c блокировкой
      * */
-    public void addNewVersionXml(@NotNull XmlLight xmlLightOld, @NotNull String xmlData, @Nullable String reason) {
+    public void addNewVersionXml(@NotNull XmlLight xmlLightOld, String xmlData, @Nullable String reason) {
         jdbcTemplate.update(XmlQuery.ADD_NEW_VERSION_XML.getQuery(),
                 new MapSqlParameterSource()
                         .addValue("name", xmlLightOld.getName(), Types.VARCHAR)
@@ -87,7 +87,7 @@ public class XmlRepository {
                         .addValue("xsd_id", xmlLightOld.getXsdLight().getId(), Types.BIGINT)
                         .addValue("version", xmlLightOld.getVersion(), Types.BIGINT)
                         .addValue("xml_new_data", xmlData, Types.VARCHAR)
-                        .addValue("reason", reason, Types.VARCHAR ));
+                        .addValue("reason", reason, Types.VARCHAR));
     }
 
     /**
