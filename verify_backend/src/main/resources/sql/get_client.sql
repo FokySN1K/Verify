@@ -1,4 +1,6 @@
-select c.name
+select c.id -- Плохо, что приходится вытаскивать внутренние идентификаторы
+     , c.client_id
+     , c.name
      , c.surname
      , c.email
      , c.role

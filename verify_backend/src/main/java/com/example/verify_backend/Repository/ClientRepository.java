@@ -29,7 +29,7 @@ public class ClientRepository {
                         .addValue("role", client.getRole(), Types.OTHER));
     }
 
-    public Optional<Client> getClient(Long clientId) {
+    public Optional<Client> getClient(String clientId) {
         return jdbcTemplate.query(ClientQuery.GET_CLIENT.getQuery(),
                 new MapSqlParameterSource()
                         .addValue("client_id", clientId, Types.VARCHAR),

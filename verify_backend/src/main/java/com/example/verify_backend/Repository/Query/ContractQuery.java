@@ -7,7 +7,8 @@ public enum ContractQuery implements Query{
     CREATE_CONTRACT("/sql/create_contract.sql"),
     GET_CONTRACTS("/sql/get_contracts.sql"),
     SET_CONTRACTOR_FOR_CONTRACT("/sql/set_contractor_for_contract.sql"),
-    CHANGE_CONTRACT_STATUS("/sql/change_contract_status.sql")
+    CHANGE_CONTRACT_STATUS("/sql/change_contract_status.sql"),
+    GET_CONTRACT_BY_CONTRACT_ID("/sql/get_contract_by_contract_id.sql"),
     ;
 
     private final String query;

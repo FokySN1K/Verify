@@ -15,7 +15,7 @@ public class GetContractsService {
     public GetContractsResponse getContracts(GetContractsRequest request) {
 
         return new GetContractsResponse()
-                .setContractList(contractRepository.getContractList(request.getClient_id()));
+                .setContractList(contractRepository.getContracts(request.getClient_id()));
 
     }
 

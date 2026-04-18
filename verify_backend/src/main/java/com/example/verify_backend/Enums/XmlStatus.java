@@ -14,4 +14,15 @@ public enum XmlStatus {
     // Принятая xml версия документа
     DONE,
     ;
+    public static XmlStatus fromStringSafe(String status) {
+        if (status == null || status.isBlank()) {
+            return null;
+        }
+
+        try {
+            return XmlStatus.valueOf(status.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
+    }
 }

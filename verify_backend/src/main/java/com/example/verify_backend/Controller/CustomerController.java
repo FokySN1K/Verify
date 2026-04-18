@@ -26,4 +26,6 @@ public class CustomerController {
         return ResponseEntity.ok(createContractService.createContract(request));
     }
 
+
+
 }

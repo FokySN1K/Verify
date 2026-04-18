@@ -2,8 +2,11 @@ package com.example.verify_backend.Repository.RowMapper;
 
 import com.example.verify_backend.Entity.Client;
 import com.example.verify_backend.Entity.Contract;
+import com.example.verify_backend.Entity.XsdLight;
 import com.example.verify_backend.Entity.XmlLight;
+import com.example.verify_backend.Enums.ClientRole;
 import com.example.verify_backend.Enums.ContractStatus;
+import com.example.verify_backend.Enums.XmlStatus;
 import org.jspecify.annotations.Nullable;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -14,26 +17,46 @@ public class XmlLightRowMapper implements RowMapper<XmlLight> {
     @Override
     public @Nullable XmlLight mapRow(ResultSet rs, int rowNum) throws SQLException {
 
-        Contract contract = new Contract();
-        Client customer = new Client();
+        XmlLight xmlLight = new XmlLight();
+
         Client contractor = new Client();
+        Client customer = new Client();
 
-        customer.setName(rs.getString("customer_name"))
-                .setSurname(rs.getString("customer_surname"))
-                .setEmail(rs.getString("customer_email"));
+        Contract contract = new Contract();
+        XsdLight xsdLight = new XsdLight();
 
-        contractor.setName(rs.getString("contractor_name"))
-                .setSurname(rs.getString("contractor_surname"))
-                .setEmail(rs.getString("contractor_email"));
-
-        contract.setName(rs.getString("name"))
-                .setDescription(rs.getString("description"))
-                .setStatus(ContractStatus.fromStringSafe(rs.getString("status")))
+        xmlLight.setId(rs.getObject("id", Long.class))
+                .setName(rs.getString("name"))
+                .setStatus(XmlStatus.fromStringSafe(rs.getString("status")))
                 .setReason(rs.getString("reason"))
-                .setContractor(contractor)
-                .setCustomer(customer);
+                .setVersion(rs.getObject("version", Long.class));
 
-        return contract;
+        contractor.setId(rs.getObject("contractor_id", Long.class))
+                .setClientId(rs.getString("contractor_client_id"))
+                .setRole(ClientRole.fromStringSafe(rs.getString("contractor_role")));
+
+        customer.setId(rs.getObject("customer_id", Long.class))
+                .setClientId(rs.getString("customer_client_id"))
+                .setRole(ClientRole.fromStringSafe(rs.getString("customer_role")));
+
+
+        xsdLight.setId(rs.getObject("xsd_id", Long.class))
+                .setName(rs.getString("xsd_name"))
+                .setLink(rs.getString("xsd_link"))
+                .setStage(rs.getString("xsd_stage"));
+
+        contract.setId(rs.getObject("contract_id", Long.class))
+                .setName(rs.getString("contract_name"))  
+                .setDescription(rs.getString("contract_description"))
+                .setReason(rs.getString("reason"))
+                .setStatus(ContractStatus.fromStringSafe(rs.getString("contract_status")));
+
+
+        xmlLight.setContractor(contractor)
+                .setCustomer(customer)
+                .setXsdLight(xsdLight)
+                .setContract(contract);
+
+        return xmlLight;
     }
 }
-

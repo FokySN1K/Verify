@@ -13,10 +13,10 @@ public class CreateContractRequest {
     @JsonProperty("client_id")
     private String clientId;
 
-    @JsonProperty("order_name")
-    private String orderName;
+    @JsonProperty("contract_name")
+    private String contractName;
 
-    @JsonProperty("order_description")
-    private String orderDescription;
+    @JsonProperty("contract_description")
+    private String contractDescription;
 
 }

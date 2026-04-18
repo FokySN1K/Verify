@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
 public class ContractRowMapper implements RowMapper<Contract> {
     @Override
     public @Nullable Contract mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -17,15 +18,20 @@ public class ContractRowMapper implements RowMapper<Contract> {
         Client customer = new Client();
         Client contractor = new Client();
 
-        customer.setName(rs.getString("customer_name"))
+        customer.setId(rs.getObject("customer_id", Long.class))
+                .setName(rs.getString("customer_name"))
+                .setClientId(rs.getString("customer_client_id"))
                 .setSurname(rs.getString("customer_surname"))
                 .setEmail(rs.getString("customer_email"));
 
-        contractor.setName(rs.getString("contractor_name"))
+        contractor.setId(rs.getObject("contractor_id", Long.class))
+                .setName(rs.getString("contractor_name"))
+                .setClientId(rs.getString("contractor_client_id"))
                 .setSurname(rs.getString("contractor_surname"))
                 .setEmail(rs.getString("contractor_email"));
 
-        contract.setName(rs.getString("name"))
+        contract.setId(rs.getObject("id", Long.class))
+                .setName(rs.getString("name"))
                 .setDescription(rs.getString("description"))
                 .setStatus(ContractStatus.fromStringSafe(rs.getString("status")))
                 .setReason(rs.getString("reason"))

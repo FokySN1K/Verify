@@ -30,3 +30,12 @@ spring:
       resolve-lazily: false
 
 
+logging:
+  level:
+    # Логирование SQL запросов
+    org.springframework.jdbc.core.JdbcTemplate: DEBUG
+    org.springframework.jdbc.core.StatementCreatorUtils: TRACE
+    # Дополнительно: логирование транзакций (опционально)
+    org.springframework.jdbc.datasource.DataSourceTransactionManager: DEBUG
+    # Логирование ваших DAO/Repository классов (опционально)
+    com.example.verify_backend.Repository: DEBUG

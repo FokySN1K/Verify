@@ -8,4 +8,16 @@ public enum XsdStatus {
     // Действующая версия xsd документа
     PROCESSING,
     ;
+
+    public static XsdStatus fromStringSafe(String status) {
+        if (status == null || status.isBlank()) {
+            return null;
+        }
+
+        try {
+            return XsdStatus.valueOf(status.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
+    }
 }

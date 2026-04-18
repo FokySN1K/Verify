@@ -7,23 +7,27 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
-import java.time.LocalDate;
-
 @Setter
 @Getter
 @ToString
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class XsdLight {
+public class Xml {
 
     private Long id;
+
     private String name;
-    private String stage;
-    private LocalDate beginDate;
-    private LocalDate endDate;
-    //private String xsdData;
-    private String link;
+
+    private Client contractor;
+
+    private XsdLight xsdLight;
+
     private XmlStatus status;
+
     private Long version;
+
+    private String xmlData;
+
+    private String reason;
 
 }
