@@ -1,10 +1,14 @@
 package com.example.verify_backend.Enums;
 
 public enum ContractStatus {
+    // Только что созданный заказ
     NEW,
     TENDER,
+    // Заказ находящийся в работе
     PROCESSING,
+    // Завершенный заказ
     DONE,
+    // Заказ отмененный
     FAILED,
     ;
 

@@ -2,6 +2,7 @@ package com.example.verify_backend.Repository.RowMapper;
 
 import com.example.verify_backend.Entity.Client;
 import com.example.verify_backend.Entity.Contract;
+import com.example.verify_backend.Entity.XmlLight;
 import com.example.verify_backend.Enums.ContractStatus;
 import org.jspecify.annotations.Nullable;
 import org.springframework.jdbc.core.RowMapper;
@@ -9,9 +10,9 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ContractRowMapper implements RowMapper<Contract> {
+public class XmlLightRowMapper implements RowMapper<XmlLight> {
     @Override
-    public @Nullable Contract mapRow(ResultSet rs, int rowNum) throws SQLException {
+    public @Nullable XmlLight mapRow(ResultSet rs, int rowNum) throws SQLException {
 
         Contract contract = new Contract();
         Client customer = new Client();
@@ -35,3 +36,4 @@ public class ContractRowMapper implements RowMapper<Contract> {
         return contract;
     }
 }
+

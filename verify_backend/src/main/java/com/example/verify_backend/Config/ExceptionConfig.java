@@ -1,5 +1,6 @@
 package com.example.verify_backend.Config;
 
+import com.example.verify_backend.Exception.ValidationLinkException;
 import com.example.verify_backend.dto.Result;
 import com.example.verify_backend.Exception.ValidationXmlException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -40,5 +41,28 @@ public class ExceptionConfig {
                 .badRequest()
                 .body(result);
     }
+
+    @ExceptionHandler(ValidationLinkException.class)
+    public ResponseEntity<Result> handleException(ValidationLinkException exception) {
+        Result result = new Result()
+                .setCode(HttpStatus.BAD_REQUEST.value())
+                .setMessage(exception.getMessage());
+
+        return ResponseEntity
+                .badRequest()
+                .body(result);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Result> handleException(Exception exception) {
+        Result result = new Result()
+                .setCode(HttpStatus.BAD_REQUEST.value())
+                .setMessage("Внутренняя ошибка сервиса");
+
+        return ResponseEntity
+                .badRequest()
+                .body(result);
+    }
+
 
 }

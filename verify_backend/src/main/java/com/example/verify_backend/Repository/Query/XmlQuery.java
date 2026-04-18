@@ -2,14 +2,13 @@ package com.example.verify_backend.Repository.Query;
 
 import com.example.verify_backend.UtilService.FileReaderService;
 
-public enum ClientQuery implements Query{
-    CREATE_CLIENT("/sql/create_client.sql"),
-    GET_CLIENT("/sql/get_client.sql"),
+public enum XmlQuery implements Query{
+    ADD_NEW_XML_LIST("/sql/add_new_xml_list.sql"),
     ;
 
     private final String query;
 
-    ClientQuery(String path) {
+    XmlQuery(String path) {
         this.query = FileReaderService.readFileFromResources(path);
     }
 
