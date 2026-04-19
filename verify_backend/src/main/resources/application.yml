@@ -29,6 +29,21 @@ spring:
       max-file-size: 50MB
       resolve-lazily: false
 
+  mail:
+    host: smtp.mail.ru
+    port: 465
+    username: test@test.ru
+    password: test
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          auth: true
+          ssl:
+            enable: true
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
 
 logging:
   level:
@@ -39,3 +54,4 @@ logging:
     org.springframework.jdbc.datasource.DataSourceTransactionManager: DEBUG
     # Логирование ваших DAO/Repository классов (опционально)
     com.example.verify_backend.Repository: DEBUG
+

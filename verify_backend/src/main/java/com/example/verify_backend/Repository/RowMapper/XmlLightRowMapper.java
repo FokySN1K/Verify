@@ -42,10 +42,12 @@ public class XmlLightRowMapper implements RowMapper<XmlLight> {
 
         contractor.setId(rs.getObject("contractor_id", Long.class))
                 .setClientId(rs.getString("contractor_client_id"))
+                .setEmail(rs.getString("contractor_email"))
                 .setRole(ClientRole.fromStringSafe(rs.getString("contractor_role")));
 
         customer.setId(rs.getObject("customer_id", Long.class))
                 .setClientId(rs.getString("customer_client_id"))
+                .setEmail(rs.getString("customer_email"))
                 .setRole(ClientRole.fromStringSafe(rs.getString("customer_role")));
 
 

@@ -35,7 +35,7 @@ public class ChangeXmlStatusRequest {
 
     @NotNull
     @JsonProperty("contract_id")
-    @Schema(name = "Внутренний идентификатор заказа", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description  = "Внутренний идентификатор заказа", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long contractId;
 
     @NotBlank

@@ -7,6 +7,7 @@ import com.example.verify_backend.Enums.XmlStatus;
 import com.example.verify_backend.Exception.BusinessLogicException;
 import com.example.verify_backend.Exception.ValidationXmlException;
 import com.example.verify_backend.Repository.XmlRepository;
+import com.example.verify_backend.UtilService.Notification.EmailSender;
 import com.example.verify_backend.UtilService.XmlValidateService;
 import com.example.verify_backend.UtilService.XsdCacheService;
 import com.example.verify_backend.dto.AddNewXmlVersionRequest;

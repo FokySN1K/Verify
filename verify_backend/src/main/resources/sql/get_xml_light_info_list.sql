@@ -11,9 +11,11 @@ select xml.id          as id
      , con.id          as contractor_id
      , con.client_id   as contractor_client_id
      , con.role        as contractor_role
+     , con.email       as contractor_email
      , cust.id         as customer_id
      , cust.client_id  as customer_client_id
      , cust.role       as customer_role
+     , cust.email      as customer_email
      , c.id            as contract_id
      , c.name          as contract_name
      , c.description   as contract_description

@@ -1,7 +1,6 @@
 package com.example.verify_backend.UtilService;
 
 import com.example.verify_backend.Entity.Xsd;
-import com.example.verify_backend.Entity.XsdLight;
 import com.example.verify_backend.Exception.BusinessLogicException;
 import com.example.verify_backend.Repository.XsdRepository;
 import jakarta.validation.constraints.NotNull;
@@ -27,6 +26,7 @@ public class XsdCacheService {
     }
 
     // Обновляем кэш 1 раз в 6 часов
+    // TODO брать значения из кэша
     @Scheduled(fixedDelay = 6 * 60 * 60 * 1000, initialDelay = 6_000)
     private void renewProcessingXsdCacheMap() {
         List<Xsd> xsdList = xsdRepository.getProcessedXsdList();
