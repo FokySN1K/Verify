@@ -7,12 +7,12 @@ import com.example.verify_backend.Enums.XmlStatus;
 import com.example.verify_backend.Exception.BusinessLogicException;
 import com.example.verify_backend.Exception.ValidationXmlException;
 import com.example.verify_backend.Repository.XmlRepository;
-import com.example.verify_backend.UtilService.Notification.EmailSender;
 import com.example.verify_backend.UtilService.XmlValidateService;
 import com.example.verify_backend.UtilService.XsdCacheService;
 import com.example.verify_backend.dto.AddNewXmlVersionRequest;
 import com.example.verify_backend.dto.Result;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
@@ -20,6 +20,7 @@ import org.xml.sax.SAXParseException;
 import java.io.IOException;
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class AddNewXmlVersionService {
@@ -30,16 +31,18 @@ public class AddNewXmlVersionService {
 
     public Result addNewXmlVersion(AddNewXmlVersionRequest request) {
 
+        log.info("[addNewXmlVersion] Operation started");
         XmlLight xmlLight = xmlRepository.getLastXmlLightInfo(request.getXmlName(), request.getXsdId(), request.getContractId())
                 .orElseThrow(() -> new BusinessLogicException("Не получилось найти информацию о xml"));
 
-        if(!(ContractStatus.PROCESSING.name().equals(xmlLight.getContract().getStatus().name()))) {
+        if (!(ContractStatus.PROCESSING.name().equals(xmlLight.getContract().getStatus().name()))) {
             throw new BusinessLogicException("Заказ должен находиться в статусе 'PROCESSING'");
         }
 
-        if (!(XmlStatus.PROCESSING.name().equals(xmlLight.getStatus().name())
-                || XmlStatus.REFUSED.name().equals(xmlLight.getStatus().name()))) {
-            throw new BusinessLogicException("Xml документ должен находиться в статусе 'PROCESSING' или 'REFUSED'");
+        if (!(XmlStatus.NEW == xmlLight.getStatus()
+                || XmlStatus.PROCESSING == xmlLight.getStatus()
+                || XmlStatus.REFUSED == xmlLight.getStatus())) {
+            throw new BusinessLogicException("Xml документ должен находиться в статусе 'NEW', 'PROCESSING' или 'REFUSED'");
         }
 
         if (!request.getClientId().equals(xmlLight.getContractor().getClientId())) {
@@ -55,7 +58,7 @@ public class AddNewXmlVersionService {
         } catch (IOException e) {
             throw new ValidationXmlException("Ошибка при чтении файла");
         } catch (SAXException e) {
-            throw new ValidationXmlException("Ошибка при чтении файла. Формат некорретен");
+            throw new ValidationXmlException("Ошибка при чтении файла. Формат некорректен");
         }
 
         if (!exceptionList.isEmpty()) {
@@ -65,6 +68,7 @@ public class AddNewXmlVersionService {
 
         xmlRepository.addNewVersionXml(xmlLight, request.getXmlData(), request.getReason());
 
+        log.info("[addNewXmlVersion] Operation finished");
         return new Result();
 
     }

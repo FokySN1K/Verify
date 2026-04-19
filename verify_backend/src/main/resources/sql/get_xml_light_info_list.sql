@@ -19,6 +19,7 @@ select xml.id          as id
      , c.id            as contract_id
      , c.name          as contract_name
      , c.description   as contract_description
+     , c.reason        as contract_reason
      , c.status        as contract_status
   from xml xml
   join xsd xsd on xsd.id = xml.xsd_id

@@ -9,8 +9,10 @@ import com.example.verify_backend.Repository.ContractRepository;
 import com.example.verify_backend.dto.CreateContractRequest;
 import com.example.verify_backend.dto.Result;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class CreateContractService {
@@ -20,6 +22,7 @@ public class CreateContractService {
 
     public Result createContract(CreateContractRequest request) {
 
+        log.info("[createContract] Operation started");
         Client client = clientRepository.getClient(request.getClientId())
                 .orElseThrow(() -> new BusinessLogicException("Клиента не существует"));
 
@@ -35,6 +38,7 @@ public class CreateContractService {
 
         contractRepository.createContract(contract);
 
+        log.info("[createContract] Operation finished");
         return new Result();
     }
 

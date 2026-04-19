@@ -23,9 +23,6 @@ public class XmlLightRowMapper implements RowMapper<XmlLight> {
 
     @Override
     public @NotNull XmlLight mapRow(ResultSet rs, int rowNum) throws SQLException {
-
-        System.out.println("КАНАРЕЙКА");
-
         XmlLight xmlLight = createInstance();
 
         Client contractor = new Client();
@@ -58,9 +55,9 @@ public class XmlLightRowMapper implements RowMapper<XmlLight> {
                 .setStatus(XsdStatus.fromStringSafe(rs.getString("xsd_status")));
 
         contract.setId(rs.getObject("contract_id", Long.class))
-                .setName(rs.getString("contract_name"))  
+                .setName(rs.getString("contract_name"))
                 .setDescription(rs.getString("contract_description"))
-                .setReason(rs.getString("reason"))
+                .setReason(rs.getString("contract_reason"))
                 .setStatus(ContractStatus.fromStringSafe(rs.getString("contract_status")));
 
 

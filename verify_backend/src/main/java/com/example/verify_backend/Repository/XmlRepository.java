@@ -4,11 +4,12 @@ import com.example.verify_backend.Entity.Xml;
 import com.example.verify_backend.Entity.XmlLight;
 import com.example.verify_backend.Entity.XsdLight;
 import com.example.verify_backend.Enums.XmlStatus;
+import com.example.verify_backend.Exception.NoAffectException;
 import com.example.verify_backend.Repository.Query.XmlQuery;
 import com.example.verify_backend.Repository.RowMapper.XmlLightRowMapper;
 import com.example.verify_backend.Repository.RowMapper.XmlRowMapper;
 import jakarta.validation.constraints.NotNull;
-import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.jspecify.annotations.Nullable;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -20,12 +21,16 @@ import java.util.List;
 import java.util.Optional;
 
 
+@Slf4j
 @Repository
-@RequiredArgsConstructor
 public class XmlRepository {
 
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
+
+    public XmlRepository(NamedParameterJdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     /**
      * Выдаём облегченную информацию по xml договорам
@@ -62,17 +67,19 @@ public class XmlRepository {
     }
 
 
-    public void changeXmlStatus(XmlLight xmlLight, XmlStatus status) {
-
-        System.out.println(xmlLight.getName());
-        jdbcTemplate.update(XmlQuery.CHANGE_XML_STATUS.getQuery(),
+    public void changeXmlStatus(XmlLight xmlLight, XmlStatus status, @Nullable String reason) {
+        int affectRow = jdbcTemplate.update(XmlQuery.CHANGE_XML_STATUS.getQuery(),
                 new MapSqlParameterSource()
                         .addValue("name", xmlLight.getName(), Types.VARCHAR)
-                        .addValue("contract_id", xmlLight.getContractor().getId(), Types.BIGINT)
+                        .addValue("contract_id", xmlLight.getContract().getId(), Types.BIGINT)
                         .addValue("xsd_id", xmlLight.getXsdLight().getId(), Types.BIGINT)
                         .addValue("version", xmlLight.getVersion(), Types.BIGINT)
                         .addValue("status", status.name(), Types.VARCHAR)
-                        .addValue("reason", xmlLight.getReason(), Types.VARCHAR));
+                        .addValue("reason", reason, Types.VARCHAR));
+
+        if (affectRow == 0) {
+            throw new NoAffectException("Не удалось изменить статус XML документа");
+        }
     }
 
     /**
@@ -82,14 +89,18 @@ public class XmlRepository {
      * !!!! Перед вызовом метода обязательно вызываем получение XmlInfoLight c блокировкой
      * */
     public void addNewVersionXml(@NotNull XmlLight xmlLightOld, String xmlData, @Nullable String reason) {
-        jdbcTemplate.update(XmlQuery.ADD_NEW_VERSION_XML.getQuery(),
+        int affectRow = jdbcTemplate.update(XmlQuery.ADD_NEW_VERSION_XML.getQuery(),
                 new MapSqlParameterSource()
                         .addValue("name", xmlLightOld.getName(), Types.VARCHAR)
-                        .addValue("contract_id", xmlLightOld.getContractor().getId(), Types.BIGINT)
+                        .addValue("contract_id", xmlLightOld.getContract().getId(), Types.BIGINT)
                         .addValue("xsd_id", xmlLightOld.getXsdLight().getId(), Types.BIGINT)
                         .addValue("version", xmlLightOld.getVersion(), Types.BIGINT)
                         .addValue("xml_new_data", xmlData, Types.VARCHAR)
                         .addValue("reason", reason, Types.VARCHAR));
+
+        if (affectRow == 0) {
+            throw new NoAffectException("Не удалось создать новую версию XML документа");
+        }
     }
 
     /**
@@ -101,6 +112,7 @@ public class XmlRepository {
     public void addNewXmlList(@NotNull Long contractId, @NotNull List<XmlLight> xmlLightList) {
 
         if (xmlLightList.isEmpty()) {
+            log.debug("[XmlRepository] Early return");
             return;
         }
 

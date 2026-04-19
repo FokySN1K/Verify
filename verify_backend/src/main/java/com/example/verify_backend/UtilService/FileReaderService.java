@@ -1,8 +1,9 @@
 package com.example.verify_backend.UtilService;
 
 
-import org.springframework.stereotype.Service;
 import org.apache.commons.io.IOUtils;
+import org.springframework.stereotype.Service;
+
 import java.nio.charset.StandardCharsets;
 
 @Service
@@ -13,7 +14,7 @@ public class FileReaderService {
         try {
             return IOUtils.resourceToString(path, StandardCharsets.UTF_8);
         } catch (java.io.IOException e) {
-            throw new RuntimeException("1234");
+            throw new IllegalStateException("Не удалось прочитать ресурс: " + path, e);
         }
 
     }

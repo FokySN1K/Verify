@@ -10,8 +10,10 @@ import com.example.verify_backend.Repository.ContractRepository;
 import com.example.verify_backend.dto.Result;
 import com.example.verify_backend.dto.SetContractorRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class SetContractorService {
@@ -21,10 +23,11 @@ public class SetContractorService {
 
     public Result setContractorService(SetContractorRequest request) {
 
+        log.info("[setContractorService] Operation started");
         Contract contract = contractRepository.getContractByContractId(request.getContractId())
                 .orElseThrow(() -> new BusinessLogicException("Не найден заказ"));
         Client client = clientRepository.getClient(request.getContractorClientId())
-                        .orElseThrow(() -> new RuntimeException("Не найден подрядчик"));
+                .orElseThrow(() -> new BusinessLogicException("Не найден подрядчик"));
 
         if (!ContractStatus.NEW.name().equals(contract.getStatus().name())) {
             throw new BusinessLogicException("Устанавливать подрядчика можно только на заказ со статусом NEW");
@@ -35,12 +38,13 @@ public class SetContractorService {
         }
 
         if (!(client.getRole().name().equals(ClientRole.CONTRACTOR.name()))) {
-            throw new BusinessLogicException("Клиент с переданным customerClientId не является подрядчиком")    ;
+            throw new BusinessLogicException("Клиент с переданным customerClientId не является подрядчиком");
         }
 
 
         contractRepository.setContractorForContract(request.getContractId(), request.getContractorClientId());
 
+        log.info("[setContractorService] Operation finished");
         return new Result();
     }
 

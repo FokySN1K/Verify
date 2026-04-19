@@ -17,10 +17,11 @@ select xml.id          as id
      , cust.client_id  as customer_client_id
      , cust.role       as customer_role
      , cust.email      as customer_email
-     , c.id            AS contract_id
-     , c.name          AS contract_name
-     , c.description   AS contract_description
-     , c.status        AS contract_status
+     , c.id            as contract_id
+     , c.name          as contract_name
+     , c.description   as contract_description
+     , c.reason        as contract_reason
+     , c.status        as contract_status
   from xml xml
   join xsd xsd on xsd.id = xml.xsd_id
   join contract c on c.id = xml.contract_id

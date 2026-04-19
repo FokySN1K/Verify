@@ -1,6 +1,7 @@
 package com.example.verify_backend.UtilService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.descriptor.XmlErrorHandler;
 import org.jspecify.annotations.NonNull;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class XmlValidateService {
@@ -26,6 +28,7 @@ public class XmlValidateService {
 
     // Валидация по тексту выгруженному в память
     public List<SAXParseException> validate(String xml, String xsd) throws SAXException, IOException {
+        log.info("[validate] Operation started");
         Schema schema = schemaFactory.newSchema(new StreamSource(new StringReader(xsd)));
         Validator validator = schema.newValidator();
 
@@ -34,11 +37,13 @@ public class XmlValidateService {
 
         validator.validate(new StreamSource(new StringReader(xml)));
 
+        log.info("[validate] Operation finished");
         return getSaxParseExceptions(errorHandler);
     }
 
     // Валидация по файлам
     public List<SAXParseException> validate(InputStream xml, InputStream xsd) throws SAXException, IOException {
+        log.info("[validate] Operation started");
         Schema schema = schemaFactory.newSchema(new StreamSource(xsd));
         Validator validator = schema.newValidator();
 
@@ -47,6 +52,7 @@ public class XmlValidateService {
 
         validator.validate(new StreamSource(xml));
 
+        log.info("[validate] Operation finished");
         return getSaxParseExceptions(errorHandler);
     }
 

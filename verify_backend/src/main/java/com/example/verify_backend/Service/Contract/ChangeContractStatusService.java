@@ -7,8 +7,10 @@ import com.example.verify_backend.Repository.ContractRepository;
 import com.example.verify_backend.dto.ChangeContractStatusRequest;
 import com.example.verify_backend.dto.Result;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ChangeContractStatusService {
@@ -16,6 +18,7 @@ public class ChangeContractStatusService {
     private final ContractRepository contractRepository;
 
     public Result changeContractStatus(ChangeContractStatusRequest request) {
+        log.info("[changeContractStatus] Operation started");
         Contract contract = contractRepository.getContractByContractId(request.getContractId())
                 .orElseThrow(() -> new BusinessLogicException("Не найден заказ по клиенту"));
 
@@ -35,6 +38,7 @@ public class ChangeContractStatusService {
 
         contractRepository.changeContractStatus(request.getContractId(), request.getContractStatus());
 
+        log.info("[changeContractStatus] Operation finished");
         return new Result();
 
     }

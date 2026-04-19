@@ -9,10 +9,12 @@ import com.example.verify_backend.dto.GetContractsResponse;
 import com.example.verify_backend.dto.GetXmlDataRequest;
 import com.example.verify_backend.dto.GetXmlDataResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class GetXmlDataService {
@@ -21,6 +23,7 @@ public class GetXmlDataService {
 
     public GetXmlDataResponse getXmlData(GetXmlDataRequest request) {
 
+        log.info("[getXmlData] Operation started");
         Xml xml = xmlRepository.getXmlByXmlId(request.getXmlId())
                 .orElseThrow(() -> new BusinessLogicException("Не найден xml документ"));
 
@@ -28,6 +31,7 @@ public class GetXmlDataService {
             throw new BusinessLogicException("Xml документ не принадлежит клиенту");
         }
 
+        log.info("[getXmlData] Operation finished");
         return new GetXmlDataResponse().setXmlData(xml.getXmlData());
     }
 

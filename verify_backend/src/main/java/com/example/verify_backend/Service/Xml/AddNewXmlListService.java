@@ -10,11 +10,13 @@ import com.example.verify_backend.Repository.XmlRepository;
 import com.example.verify_backend.dto.AddNewXmlListRequest;
 import com.example.verify_backend.dto.Result;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class AddNewXmlListService {
@@ -24,6 +26,7 @@ public class AddNewXmlListService {
 
     public Result addNewXmlList(AddNewXmlListRequest request) {
 
+        log.info("[addNewXmlList] Operation started");
         Contract contract = contractRepository.getContractByContractId(request.getContractId())
                 .orElseThrow(() -> new BusinessLogicException("Заказа не существует"));
 
@@ -44,6 +47,7 @@ public class AddNewXmlListService {
 
         xmlRepository.addNewXmlList(contract.getId(), xmlLightList);
 
+        log.info("[addNewXmlList] Operation finished");
         return new Result();
     }
 
