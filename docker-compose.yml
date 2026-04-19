@@ -1,0 +1,78 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: verify-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-verify}
+      POSTGRES_USER: ${POSTGRES_USER:-verify}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-verify}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-verify} -d ${POSTGRES_DB:-verify}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+
+  db-migrations:
+    image: maven:3.9.11-eclipse-temurin-25
+    container_name: verify-db-migrations
+    working_dir: /workspace
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      LIQUIBASE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB:-verify}
+      LIQUIBASE_USERNAME: ${POSTGRES_USER:-verify}
+      LIQUIBASE_PASSWORD: ${POSTGRES_PASSWORD:-verify}
+      LIQUIBASE_SCHEMA: ${DB_SCHEMA:-public}
+    volumes:
+      - ./verify_database:/workspace/verify_database:ro
+      - maven_repo:/root/.m2
+    command: >
+      sh -lc "mvn -f /workspace/verify_database/pom.xml
+      -DskipTests
+      -Dliquibase.url=$$LIQUIBASE_URL
+      -Dliquibase.username=$$LIQUIBASE_USERNAME
+      -Dliquibase.password=$$LIQUIBASE_PASSWORD
+      -Dliquibase.defaultSchemaName=$$LIQUIBASE_SCHEMA
+      liquibase:update"
+    restart: "no"
+
+  backend:
+    build:
+      context: ./verify_backend
+      dockerfile: Dockerfile
+    container_name: verify-backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      db-migrations:
+        condition: service_completed_successfully
+    environment:
+      SERVER_PORT: 8080
+      DB_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB:-verify}
+      DB_USERNAME: ${POSTGRES_USER:-verify}
+      DB_PASSWORD: ${POSTGRES_PASSWORD:-verify}
+      DB_POOL_MAX_SIZE: ${DB_POOL_MAX_SIZE:-10}
+      DB_POOL_MIN_IDLE: ${DB_POOL_MIN_IDLE:-2}
+      UPLOAD_DIR: /app/data/uploads
+      MAIL_HOST: ${MAIL_HOST:-smtp.mail.ru}
+      MAIL_PORT: ${MAIL_PORT:-465}
+      MAIL_USERNAME: ${MAIL_USERNAME:-test@test.ru}
+      MAIL_PASSWORD: ${MAIL_PASSWORD:-test}
+      MAIL_PROTOCOL: ${MAIL_PROTOCOL:-smtp}
+    ports:
+      - "${APP_PORT:-8080}:8080"
+    volumes:
+      - uploads_data:/app/data/uploads
+
+volumes:
+  postgres_data:
+  uploads_data:
+  maven_repo:
