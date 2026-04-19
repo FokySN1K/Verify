@@ -7,6 +7,7 @@ select xml.id          as id
      , xsd.name        as xsd_name
      , xsd.link        as xsd_link
      , xsd.stage       as xsd_stage
+     , xsd.status      as xsd_status
      , con.id          as contractor_id
      , con.client_id   as contractor_client_id
      , con.role        as contractor_role

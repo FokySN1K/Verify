@@ -7,6 +7,7 @@ import com.example.verify_backend.Entity.XmlLight;
 import com.example.verify_backend.Enums.ClientRole;
 import com.example.verify_backend.Enums.ContractStatus;
 import com.example.verify_backend.Enums.XmlStatus;
+import com.example.verify_backend.Enums.XsdStatus;
 import org.jspecify.annotations.Nullable;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -43,7 +44,8 @@ public class XmlLightRowMapper implements RowMapper<XmlLight> {
         xsdLight.setId(rs.getObject("xsd_id", Long.class))
                 .setName(rs.getString("xsd_name"))
                 .setLink(rs.getString("xsd_link"))
-                .setStage(rs.getString("xsd_stage"));
+                .setStage(rs.getString("xsd_stage"))
+                .setStatus(XsdStatus.fromStringSafe(rs.getString("xsd_status")));
 
         contract.setId(rs.getObject("contract_id", Long.class))
                 .setName(rs.getString("contract_name"))  

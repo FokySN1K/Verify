@@ -64,13 +64,16 @@ public class XmlRepository {
 
 
     public void changeXmlStatus(XmlLight xmlLight, XmlStatus status) {
+
+        System.out.println(xmlLight.getName());
         jdbcTemplate.update(XmlQuery.CHANGE_XML_STATUS.getQuery(),
                 new MapSqlParameterSource()
                         .addValue("name", xmlLight.getName(), Types.VARCHAR)
                         .addValue("contract_id", xmlLight.getContractor().getId(), Types.BIGINT)
                         .addValue("xsd_id", xmlLight.getXsdLight().getId(), Types.BIGINT)
                         .addValue("version", xmlLight.getVersion(), Types.BIGINT)
-                        .addValue("status", status.name(), Types.VARCHAR));
+                        .addValue("status", status.name(), Types.VARCHAR)
+                        .addValue("reason", xmlLight.getReason(), Types.VARCHAR));
     }
 
     /**

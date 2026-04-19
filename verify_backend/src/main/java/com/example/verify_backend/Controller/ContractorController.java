@@ -37,7 +37,7 @@ public class ContractorController {
     }
 
     @PostMapping(ADD_NEW_XML_VERSION)
-    public ResponseEntity<Result> addNewXmlList(@NotNull @Validated @RequestBody AddNewXmlVersionRequest request) {
+    public ResponseEntity<Result> addNewXmlVersion(@NotNull @Validated @RequestBody AddNewXmlVersionRequest request) {
         return ResponseEntity.ok(addNewXmlVersionService.addNewXmlVersion(request));
     }
 

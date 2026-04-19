@@ -1,5 +1,6 @@
 update xml
-   set status = :status
+   set status = :status::xml_status
+     , reason = :reason
  where name = :name
    and contract_id = :contract_id
    and xsd_id = :xsd_id

@@ -3,6 +3,7 @@ package com.example.verify_backend.Service.Contract;
 import com.example.verify_backend.Entity.Client;
 import com.example.verify_backend.Entity.Contract;
 import com.example.verify_backend.Enums.ClientRole;
+import com.example.verify_backend.Exception.BusinessLogicException;
 import com.example.verify_backend.Repository.ClientRepository;
 import com.example.verify_backend.Repository.ContractRepository;
 import com.example.verify_backend.dto.CreateContractRequest;
@@ -20,11 +21,11 @@ public class CreateContractService {
     public Result createContract(CreateContractRequest request) {
 
         Client client = clientRepository.getClient(request.getClientId())
-                .orElseThrow(() -> new RuntimeException("Клиента не существует"));
+                .orElseThrow(() -> new BusinessLogicException("Клиента не существует"));
 
 
         if (!ClientRole.CUSTOMER.name().equals(client.getRole().name())) {
-            throw new RuntimeException("Создавать заказ может только заказчик. Создайте аккаунт с другой ролью");
+            throw new BusinessLogicException("Создавать заказ может только заказчик. Создайте аккаунт с другой ролью");
         }
 
         Contract contract = new Contract()

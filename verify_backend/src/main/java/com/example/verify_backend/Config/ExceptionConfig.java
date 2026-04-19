@@ -1,5 +1,6 @@
 package com.example.verify_backend.Config;
 
+import com.example.verify_backend.Exception.BusinessLogicException;
 import com.example.verify_backend.Exception.ValidationLinkException;
 import com.example.verify_backend.dto.Result;
 import com.example.verify_backend.Exception.ValidationXmlException;
@@ -25,6 +26,17 @@ public class ExceptionConfig {
         Result result = new Result()
                 .setCode(HttpStatus.BAD_REQUEST.value())
                 .setMessage(String.valueOf(messageList));
+
+        return ResponseEntity
+                .badRequest()
+                .body(result);
+    }
+
+    @ExceptionHandler(BusinessLogicException.class)
+    public ResponseEntity<Result> handleException(BusinessLogicException exception) {
+        Result result = new Result()
+                .setCode(HttpStatus.BAD_REQUEST.value())
+                .setMessage(exception.getMessage());
 
         return ResponseEntity
                 .badRequest()

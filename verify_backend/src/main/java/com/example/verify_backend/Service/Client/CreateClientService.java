@@ -15,7 +15,6 @@ public class CreateClientService {
 
     public Result createClient(CreateClientRequest request) {
 
-        // TODO переписать на маппер
         Client client = new Client()
                 .setClientId(request.getClientId())
                 .setName(request.getName())

@@ -3,6 +3,8 @@ package com.example.verify_backend.Service.Xml;
 import com.example.verify_backend.Entity.Contract;
 import com.example.verify_backend.Entity.XmlLight;
 import com.example.verify_backend.Entity.XsdLight;
+import com.example.verify_backend.Enums.ContractStatus;
+import com.example.verify_backend.Exception.BusinessLogicException;
 import com.example.verify_backend.Repository.ContractRepository;
 import com.example.verify_backend.Repository.XmlRepository;
 import com.example.verify_backend.dto.AddNewXmlListRequest;
@@ -23,13 +25,17 @@ public class AddNewXmlListService {
     public Result addNewXmlListService(AddNewXmlListRequest request) {
 
         // TODO Добавить проверку, что xsd не истёк
-        Contract contract = contractRepository.getContractByContractId(request.getContractId())
-                .orElseThrow(() -> new RuntimeException("Заказа не существует"));
 
-        System.out.println(contract);
+
+        Contract contract = contractRepository.getContractByContractId(request.getContractId())
+                .orElseThrow(() -> new BusinessLogicException("Заказа не существует"));
+
+        if(!ContractStatus.PROCESSING.name().equals(contract.getStatus().name())) {
+            throw new BusinessLogicException("Заказ должен находиться в статусе 'PROCESSING'");
+        }
 
         if (!request.getClientId().equals(contract.getCustomer().getClientId())) {
-            throw new IllegalArgumentException("Ошибка в получении заказа");
+            throw new BusinessLogicException("Ошибка в получении заказа");
         }
 
         List<XmlLight> xmlLightList = new ArrayList<>();

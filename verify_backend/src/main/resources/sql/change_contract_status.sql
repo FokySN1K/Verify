@@ -1,4 +1,4 @@
 update contract
-   set status = :status
+   set status = :status::contract_status
  where id = :contract_id
    and status = 'PROCESSING'
