@@ -4,5 +4,5 @@ select c.id
      , c.surname
      , c.email
      , c.role
-from client c
-where c.client_id = :client_id
+  from client c
+ where c.client_id = :client_id

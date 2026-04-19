@@ -19,15 +19,16 @@ public class SetContractorRequest {
 
     @NotBlank
     @JsonProperty("customer_client_id")
+    @Schema(description = "Внешний идентификатор клиента-заказчика", requiredMode = Schema.RequiredMode.REQUIRED)
     private String customerClientId;
 
     @NotNull
     @JsonProperty("contract_id")
-    @Schema(name = "Внутренний идентификатор заказа", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Внутренний идентификатор заказа", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long contractId;
 
     @NotBlank
     @JsonProperty("contractor_client_id")
+    @Schema(description = "Внешний идентификатор клиента-исполнителя", requiredMode = Schema.RequiredMode.REQUIRED)
     private String contractorClientId;
-
 }

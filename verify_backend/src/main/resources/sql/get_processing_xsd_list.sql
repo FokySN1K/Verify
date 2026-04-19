@@ -7,5 +7,5 @@ select xsd.id
      , xsd.status
      , xsd.link
      , xsd.version
-from xsd
-where xsd.status = 'PROCESSING'
+  from xsd
+ where xsd.status = 'PROCESSING'

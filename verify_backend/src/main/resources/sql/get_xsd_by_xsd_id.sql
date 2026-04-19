@@ -1,4 +1,4 @@
-select xsd.id
+ select xsd.id
      , xsd.name
      , xsd.data
      , xsd.stage
@@ -7,5 +7,5 @@ select xsd.id
      , xsd.status
      , xsd.link
      , xsd.version
-from xsd
-where xsd.id = :xsd_id
+  from xsd
+ where xsd.id = :xsd_id

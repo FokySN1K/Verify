@@ -20,7 +20,7 @@ select xml.id          as id
      , c.name          as contract_name
      , c.description   as contract_description
      , c.status        as contract_status
-from xml xml
+  from xml xml
   join xsd xsd on xsd.id = xml.xsd_id
   join contract c on c.id = xml.contract_id
   left join client con on c.contractor_id = con.id

@@ -6,5 +6,5 @@ select xsd.id
      , xsd.status
      , xsd.link
      , xsd.version
-from xsd
-where xsd.status in ('OLD', 'PROCESSING')
+  from xsd
+ where xsd.status in ('OLD', 'PROCESSING')

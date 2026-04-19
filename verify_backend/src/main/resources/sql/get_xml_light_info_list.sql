@@ -20,10 +20,10 @@ select xml.id          as id
      , c.name          as contract_name
      , c.description   as contract_description
      , c.status        as contract_status
-from xml xml
-         join xsd xsd on xsd.id = xml.xsd_id
-         join contract c on c.id = xml.contract_id
-         left join client con on c.contractor_id = con.id
-         left join client cust on c.customer_id = cust.id
-where con.client_id = :client_id
-   or cust.client_id = :client_id
+  from xml xml
+  join xsd xsd on xsd.id = xml.xsd_id
+  join contract c on c.id = xml.contract_id
+  left join client con on c.contractor_id = con.id
+  left join client cust on c.customer_id = cust.id
+ where con.client_id = :client_id
+    or cust.client_id = :client_id

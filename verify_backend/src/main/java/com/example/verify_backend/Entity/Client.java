@@ -27,15 +27,20 @@ public class Client {
     private String clientId;
 
     @JsonProperty("name")
+    @Schema(description = "Имя клиента")
     private String name;
 
     @JsonProperty("surname")
+    @Schema(description = "Фамилия клиента")
     private String surname;
 
     @JsonProperty("role")
+    @Schema(description = "Роль клиента")
     private ClientRole role;
 
     @JsonProperty("email")
+    @Email
+    @Schema(description = "Электронная почта клиента")
     private String email;
 
 }

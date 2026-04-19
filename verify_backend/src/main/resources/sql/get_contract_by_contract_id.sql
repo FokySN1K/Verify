@@ -14,6 +14,6 @@ select c.id          as id
      , cust.surname  as customer_surname
      , cust.email    as customer_email
   from contract c
- left join client con on c.contractor_id = con.id
- left join client cust on c.customer_id = cust.id
-where c.id = :contract_id
+  left join client con on c.contractor_id = con.id
+  left join client cust on c.customer_id = cust.id
+ where c.id = :contract_id
