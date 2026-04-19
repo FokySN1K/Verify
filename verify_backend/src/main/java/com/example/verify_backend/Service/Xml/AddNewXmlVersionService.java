@@ -2,6 +2,7 @@ package com.example.verify_backend.Service.Xml;
 
 import com.example.verify_backend.Entity.XmlLight;
 import com.example.verify_backend.Enums.ContractStatus;
+import com.example.verify_backend.Enums.XmlStatus;
 import com.example.verify_backend.Exception.BusinessLogicException;
 import com.example.verify_backend.Repository.XmlRepository;
 import com.example.verify_backend.UtilService.XmlValidateService;
@@ -25,8 +26,13 @@ public class AddNewXmlVersionService {
         XmlLight xmlLight = xmlRepository.getLastXmlLightInfo(request.getXmlName(), request.getXsdId(), request.getContractId())
                 .orElseThrow(() -> new BusinessLogicException("Не получилось найти информацию о xml"));
 
-        if(!ContractStatus.PROCESSING.name().equals(xmlLight.getContract().getStatus().name())) {
+        if(!(ContractStatus.PROCESSING.name().equals(xmlLight.getContract().getStatus().name()))) {
             throw new BusinessLogicException("Заказ должен находиться в статусе 'PROCESSING'");
+        }
+
+        if (!(XmlStatus.PROCESSING.name().equals(xmlLight.getStatus().name())
+                || XmlStatus.REFUSED.name().equals(xmlLight.getStatus().name()))) {
+            throw new BusinessLogicException("Xml документ должен находиться в статусе 'PROCESSING' или 'REFUSED'");
         }
 
         if (!request.getClientId().equals(xmlLight.getContractor().getClientId())) {

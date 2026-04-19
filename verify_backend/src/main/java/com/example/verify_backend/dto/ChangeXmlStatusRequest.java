@@ -2,6 +2,7 @@ package com.example.verify_backend.dto;
 
 import com.example.verify_backend.Enums.XmlStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.xml.bind.annotation.XmlEnum;
@@ -34,6 +35,7 @@ public class ChangeXmlStatusRequest {
 
     @NotNull
     @JsonProperty("contract_id")
+    @Schema(name = "Внутренний идентификатор заказа", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long contractId;
 
     @NotBlank

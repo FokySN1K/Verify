@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-// TODO добавить ограничение по размеру
 @Getter
 @Setter
 @Accessors(chain = true)
