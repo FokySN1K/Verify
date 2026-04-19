@@ -8,6 +8,7 @@ import com.example.verify_backend.Enums.ClientRole;
 import com.example.verify_backend.Enums.ContractStatus;
 import com.example.verify_backend.Enums.XmlStatus;
 import com.example.verify_backend.Enums.XsdStatus;
+import jakarta.validation.constraints.NotNull;
 import org.jspecify.annotations.Nullable;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -15,10 +16,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class XmlLightRowMapper implements RowMapper<XmlLight> {
-    @Override
-    public @Nullable XmlLight mapRow(ResultSet rs, int rowNum) throws SQLException {
 
-        XmlLight xmlLight = new XmlLight();
+    protected XmlLight createInstance() {
+        return new XmlLight();
+    }
+
+    @Override
+    public @NotNull XmlLight mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+        XmlLight xmlLight = createInstance();
 
         Client contractor = new Client();
         Client customer = new Client();

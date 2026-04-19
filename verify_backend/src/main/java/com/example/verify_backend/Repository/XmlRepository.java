@@ -6,6 +6,7 @@ import com.example.verify_backend.Entity.XsdLight;
 import com.example.verify_backend.Enums.XmlStatus;
 import com.example.verify_backend.Repository.Query.XmlQuery;
 import com.example.verify_backend.Repository.RowMapper.XmlLightRowMapper;
+import com.example.verify_backend.Repository.RowMapper.XmlRowMapper;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.jspecify.annotations.Nullable;
@@ -55,11 +56,11 @@ public class XmlRepository {
     }
 
 
-    public String getXmlDataByXmlId(@NotNull Long xmlId) {
-        return jdbcTemplate.queryForObject(XmlQuery.GET_XML_DATA_BY_XML_ID.getQuery(),
+    public Optional<Xml> getXmlByXmlId(@NotNull Long xmlId) {
+        return jdbcTemplate.query(XmlQuery.GET_XML_BY_XML_ID.getQuery(),
                 new MapSqlParameterSource()
                         .addValue("xml_id", xmlId, Types.BIGINT),
-                String.class);
+                new XmlRowMapper()).stream().map(xmlLight -> (Xml) xmlLight).findAny();
     }
 
 

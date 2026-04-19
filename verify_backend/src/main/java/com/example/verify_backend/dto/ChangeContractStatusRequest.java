@@ -16,6 +16,7 @@ public class ChangeContractStatusRequest {
     @JsonProperty("contract_status")
     private ContractStatus contractStatus;
 
+
     private String clientId;
 
     private Long contractId;

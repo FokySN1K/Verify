@@ -8,7 +8,7 @@ public enum XmlQuery implements Query{
     CHANGE_XML_STATUS("/sql/change_xml_status.sql"),
     GET_XML_LIGHT_INFO_LIST("/sql/get_xml_light_info_list.sql"),
     GET_LAST_XML_LIGHT_INFO("/sql/get_last_xml_light_info.sql"),
-    GET_XML_DATA_BY_XML_ID("/sql/get_xml_data_by_xml_id.sql"),
+    GET_XML_BY_XML_ID("/sql/get_xml_by_xml_id.sql"),
 
     ;
 
