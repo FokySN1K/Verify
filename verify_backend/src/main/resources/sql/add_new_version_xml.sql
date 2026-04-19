@@ -5,6 +5,7 @@ with updated_old as (
         and contract_id = :contract_id
         and xsd_id = :xsd_id
         and version = :version
+        and status in ('NEW', 'PROCESSING', 'REFUSED')
   returning id, name, contract_id, xsd_id, version
 )
 insert into xml
