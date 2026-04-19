@@ -73,20 +73,20 @@ services:
     volumes:
       - uploads_data:/app/data/uploads
 
-frontend:
-  build:
-    context: ./verify_frontend
-    dockerfile: Dockerfile
-  container_name: verify-frontend
-  restart: unless-stopped
-  depends_on:
-    backend:
-      condition: service_started
-  environment:
-    FRONTEND_PORT: ${FRONTEND_PORT:-13000}
-    VITE_API_BASE_URL: ${VITE_API_BASE_URL:-http://localhost:${APP_PORT:-8080}}
-  ports:
-    - "${FRONTEND_PORT:-13000}:13000"
+  frontend:
+      build:
+        context: ./verify_frontend
+        dockerfile: Dockerfile
+      container_name: verify-frontend
+      restart: unless-stopped
+      depends_on:
+        backend:
+          condition: service_started
+      environment:
+        FRONTEND_PORT: ${FRONTEND_PORT:-13000}
+        VITE_API_BASE_URL: ${VITE_API_BASE_URL:-http://localhost:${APP_PORT:-8080}}
+      ports:
+        - "${FRONTEND_PORT:-13000}:13000"
 
 volumes:
   postgres_data:
