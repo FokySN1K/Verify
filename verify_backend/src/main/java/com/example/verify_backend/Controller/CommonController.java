@@ -4,6 +4,7 @@ import com.example.verify_backend.Service.Client.CreateClientService;
 import com.example.verify_backend.Service.Contract.ChangeContractStatusService;
 import com.example.verify_backend.Service.Xml.ChangeXmlStatusService;
 import com.example.verify_backend.Service.Xml.GetXmlDataService;
+import com.example.verify_backend.Service.Xml.GetXmlLightInfoListService;
 import com.example.verify_backend.dto.*;
 import com.example.verify_backend.Service.Validation.ValidateWithXsdDataService;
 import com.example.verify_backend.Service.Validation.ValidateWithXsdFilesService;
@@ -23,13 +24,18 @@ public class CommonController {
 
 
     public final static String BASE_PREFIX = "";
+    public final static String CONTRACT_PREFIX = BASE_PREFIX + "/contract";
+    public final static String XML_CONTRACT_PREFIX = CONTRACT_PREFIX + "/xml";
 
     public final static String VALIDATE_WITH_XSD_DATA = BASE_PREFIX + "/validate_with_xsd_data";
     public final static String VALIDATE_WITH_XSD_FILES = BASE_PREFIX + "/validate_with_xsd_files";
     public final static String CREATE_CLIENT = BASE_PREFIX + "/create_client";
-    public final static String CHANGE_XML_STATUS = BASE_PREFIX + "/contract/xml/change_xml_status";
-    public final static String CHANGE_CONTRACT_STATUS = BASE_PREFIX + "/contract/change_contract_status";
-    public final static String GET_XML_DATA = BASE_PREFIX + "/contract/get_xml_data";
+
+    public final static String CHANGE_XML_STATUS = XML_CONTRACT_PREFIX + "/change_xml_status";
+
+    public final static String CHANGE_CONTRACT_STATUS = CONTRACT_PREFIX + "/change_contract_status";
+    public final static String GET_XML_DATA = CONTRACT_PREFIX + "/get_xml_data";
+    public final static String GET_XML_LIGHT_INFO_LIST = CONTRACT_PREFIX + "/get_xml_light_info_list";
 
     private final ValidateWithXsdDataService validateWithXsdDataService;
     private final ValidateWithXsdFilesService validateWithXsdFilesService;
@@ -37,6 +43,7 @@ public class CommonController {
     private final ChangeXmlStatusService changeXmlStatusService;
     private final ChangeContractStatusService changeContractStatusService;
     private final GetXmlDataService getXmlDataService;
+    private final GetXmlLightInfoListService getXmlLightInfoListService;
 
     @PostMapping(VALIDATE_WITH_XSD_DATA)
     public ResponseEntity<ValidateWithXsdDataResponse> validateWithXsdData(@NotNull @Validated @RequestBody ValidateWithXsdDataRequest request) {
@@ -73,6 +80,12 @@ public class CommonController {
     public ResponseEntity<GetXmlDataResponse> getXmlData(@NotNull @Validated @RequestBody GetXmlDataRequest request) {
         return ResponseEntity
                 .ok(getXmlDataService.getXmlData(request));
+    }
+
+    @PostMapping(GET_XML_LIGHT_INFO_LIST)
+    public ResponseEntity<GetXmlLightInfoListResponse> getXmlData(@NotNull @Validated @RequestBody GetXmlLightInfoListRequest request) {
+        return ResponseEntity
+                .ok(getXmlLightInfoListService.getXmlLightInfoList(request));
     }
 
 }

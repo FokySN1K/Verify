@@ -32,12 +32,10 @@ public class XmlRepository {
      *
      *
      */
-    public List<XmlLight> getXmlLightInfoList(@NotNull String name, @NotNull Long xsdId, @NotNull Long contractId) {
+    public List<XmlLight> getXmlLightInfoList(@NotNull String clientId) {
         return jdbcTemplate.query(XmlQuery.GET_XML_LIGHT_INFO_LIST.getQuery(),
                 new MapSqlParameterSource()
-                        .addValue("name", name, Types.VARCHAR)
-                        .addValue("xsd_id", xsdId, Types.BIGINT)
-                        .addValue("contract_id", contractId, Types.BIGINT),
+                        .addValue("client_id", clientId, Types.VARCHAR),
                 new XmlLightRowMapper());
     }
 

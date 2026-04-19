@@ -24,6 +24,8 @@ public class XmlLightRowMapper implements RowMapper<XmlLight> {
     @Override
     public @NotNull XmlLight mapRow(ResultSet rs, int rowNum) throws SQLException {
 
+        System.out.println("КАНАРЕЙКА");
+
         XmlLight xmlLight = createInstance();
 
         Client contractor = new Client();

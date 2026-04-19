@@ -14,14 +14,14 @@ select xml.id          as id
      , cust.id         as customer_id
      , cust.client_id  as customer_client_id
      , cust.role       as customer_role
-     , c.name          AS contract_name
-     , c.description   AS contract_description
-     , c.status        AS contract_status
+     , c.id            as contract_id
+     , c.name          as contract_name
+     , c.description   as contract_description
+     , c.status        as contract_status
 from xml xml
          join xsd xsd on xsd.id = xml.xsd_id
          join contract c on c.id = xml.contract_id
          left join client con on c.contractor_id = con.id
          left join client cust on c.customer_id = cust.id
-where xml.contract_id = :contract_id
-  and xml.xsd_id = :xsd_id
-  and xml.name = :name
+where con.client_id = :client_id
+   or cust.client_id = :client_id
