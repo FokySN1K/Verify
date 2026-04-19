@@ -1,6 +1,6 @@
 select xsd.id
      , xsd.name
-     , xsd.data
+     , xsd.data as xml_data
      , xsd.stage
      , xsd.begin_date
      , xsd.end_date

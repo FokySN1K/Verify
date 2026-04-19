@@ -40,7 +40,7 @@ public class XsdCacheService {
     }
 
     // Обновляем кэш 1 раз в 6 часов
-    @Scheduled(fixedDelay = 6 * 60 * 60 * 1000, initialDelay = 6_000)
+    @Scheduled(fixedDelay = 6 * 60 * 60 * 1000)
     public void renewProcessingXsdCacheMap() {
         List<Xsd> xsdList = xsdRepository.getProcessedXsdList();
 
