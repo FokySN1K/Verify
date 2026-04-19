@@ -1,6 +1,5 @@
 package com.example.verify_backend.Entity;
 
-import com.example.verify_backend.Enums.XmlStatus;
 import com.example.verify_backend.Enums.XsdStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
@@ -22,7 +21,6 @@ public class XsdLight {
     private String stage;
     private LocalDate beginDate;
     private LocalDate endDate;
-    //private String xsdData;
     private String link;
     private XsdStatus status;
     private Long version;

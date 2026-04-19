@@ -32,7 +32,7 @@ public class ChangeXmlStatusService {
                 throw new BusinessLogicException("Подрядчик может менять статус только с 'PROCESSING' -> 'CHEGING'");
             }
         } else if (request.getClientId().equals(xmlLight.getCustomer().getClientId())) {
-            // Если клиент подрядчик - можем менять статус с CHECKING -> REFUSING, CHECKING -> DONE
+            // Если клиент подрядчик - можем менять статус с CHECKING -> REFUSED, CHECKING -> DONE
             if (XmlStatus.CHECKING.name().equals(xmlLight.getStatus().name())
                     && (XmlStatus.REFUSED.name().equals(request.getXmlStatus().name())
                           || XmlStatus.DONE.name().equals(request.getXmlStatus().name())) ) {

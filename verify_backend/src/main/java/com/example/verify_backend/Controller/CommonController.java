@@ -5,6 +5,7 @@ import com.example.verify_backend.Service.Contract.ChangeContractStatusService;
 import com.example.verify_backend.Service.Xml.ChangeXmlStatusService;
 import com.example.verify_backend.Service.Xml.GetXmlDataService;
 import com.example.verify_backend.Service.Xml.GetXmlLightInfoListService;
+import com.example.verify_backend.Service.Xsd.GetXsdLightListService;
 import com.example.verify_backend.dto.*;
 import com.example.verify_backend.Service.Validation.ValidateWithXsdDataService;
 import com.example.verify_backend.Service.Validation.ValidateWithXsdFilesService;
@@ -30,6 +31,7 @@ public class CommonController {
     public final static String VALIDATE_WITH_XSD_DATA = BASE_PREFIX + "/validate_with_xsd_data";
     public final static String VALIDATE_WITH_XSD_FILES = BASE_PREFIX + "/validate_with_xsd_files";
     public final static String CREATE_CLIENT = BASE_PREFIX + "/create_client";
+    public final static String GET_XSD_LIGHT_LIST = BASE_PREFIX + "/get_xsd_light_list";
 
     public final static String CHANGE_XML_STATUS = XML_CONTRACT_PREFIX + "/change_xml_status";
 
@@ -44,6 +46,7 @@ public class CommonController {
     private final ChangeContractStatusService changeContractStatusService;
     private final GetXmlDataService getXmlDataService;
     private final GetXmlLightInfoListService getXmlLightInfoListService;
+    private final GetXsdLightListService getXsdLightListService;
 
     @PostMapping(VALIDATE_WITH_XSD_DATA)
     public ResponseEntity<ValidateWithXsdDataResponse> validateWithXsdData(@NotNull @Validated @RequestBody ValidateWithXsdDataRequest request) {
@@ -86,6 +89,12 @@ public class CommonController {
     public ResponseEntity<GetXmlLightInfoListResponse> getXmlData(@NotNull @Validated @RequestBody GetXmlLightInfoListRequest request) {
         return ResponseEntity
                 .ok(getXmlLightInfoListService.getXmlLightInfoList(request));
+    }
+
+    @PostMapping(GET_XSD_LIGHT_LIST)
+    public ResponseEntity<GetXsdLightListResponse> getXsdLightList() {
+        return ResponseEntity
+                .ok(getXsdLightListService.getXsdLightList());
     }
 
 }

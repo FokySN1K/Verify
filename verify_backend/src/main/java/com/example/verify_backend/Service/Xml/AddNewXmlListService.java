@@ -22,10 +22,7 @@ public class AddNewXmlListService {
     private final XmlRepository xmlRepository;
     private final ContractRepository contractRepository;
 
-    public Result addNewXmlListService(AddNewXmlListRequest request) {
-
-        // TODO Добавить проверку, что xsd не истёк
-
+    public Result addNewXmlList(AddNewXmlListRequest request) {
 
         Contract contract = contractRepository.getContractByContractId(request.getContractId())
                 .orElseThrow(() -> new BusinessLogicException("Заказа не существует"));

@@ -1,11 +1,9 @@
 package com.example.verify_backend.Controller;
 
-import com.example.verify_backend.Service.Contract.CreateContractService;
 import com.example.verify_backend.Service.Xml.AddNewXmlListService;
 import com.example.verify_backend.Service.Xml.AddNewXmlVersionService;
 import com.example.verify_backend.dto.AddNewXmlListRequest;
 import com.example.verify_backend.dto.AddNewXmlVersionRequest;
-import com.example.verify_backend.dto.CreateContractRequest;
 import com.example.verify_backend.dto.Result;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +31,7 @@ public class ContractorController {
 
     @PostMapping(ADD_NEW_XML_LIST)
     public ResponseEntity<Result> addNewXmlList(@NotNull @Validated @RequestBody AddNewXmlListRequest request) {
-        return ResponseEntity.ok(addNewXmlListService.addNewXmlListService(request));
+        return ResponseEntity.ok(addNewXmlListService.addNewXmlList(request));
     }
 
     @PostMapping(ADD_NEW_XML_VERSION)
