@@ -22,35 +22,4 @@ public class Xsd extends XsdLight {
     @Schema(description = "Содержимое XSD схемы в виде строки")
     private String xsdData;
 
-    @JsonProperty("id")
-    @Schema(description = "Внутренний идентификатор XSD схемы")
-    private Long id;
-
-    @JsonProperty("name")
-    @Schema(description = "Название XSD схемы")
-    private String name;
-
-    @JsonProperty("stage")
-    @Schema(description = "Этап (стадия), к которому относится схема")
-    private String stage;
-
-    @JsonProperty("begin_date")
-    @Schema(description = "Дата начала действия схемы")
-    private LocalDate beginDate;
-
-    @JsonProperty("end_date")
-    @Schema(description = "Дата окончания действия схемы")
-    private LocalDate endDate;
-
-    @JsonProperty("link")
-    @Schema(description = "Ссылка на схему (например, URL или путь к файлу)")
-    private String link;
-
-    @JsonProperty("status")
-    @Schema(description = "Статус XSD схемы")
-    private XsdStatus status;
-
-    @JsonProperty("version")
-    @Schema(description = "Версия XSD схемы")
-    private Long version;
 }
