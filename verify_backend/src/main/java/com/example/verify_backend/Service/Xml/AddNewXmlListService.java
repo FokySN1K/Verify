@@ -34,7 +34,7 @@ public class AddNewXmlListService {
             throw new BusinessLogicException("Заказ должен находиться в статусе 'PROCESSING'");
         }
 
-        if (!request.getClientId().equals(contract.getCustomer().getClientId())) {
+        if (!request.getClientId().equals(contract.getContractor().getClientId())) {
             throw new BusinessLogicException("Ошибка в получении заказа");
         }
 
