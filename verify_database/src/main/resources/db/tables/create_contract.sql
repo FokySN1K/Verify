@@ -16,3 +16,12 @@ create table contract
 
 create index contract_customer_id_idx on contract(customer_id);
 create index contract_contractor_id_idx on contract(contractor_id);
+
+COMMENT ON TABLE contract IS 'Договоры/контракты между заказчиками и подрядчиками';
+COMMENT ON COLUMN contract.id IS 'Уникальный идентификатор контракта';
+COMMENT ON COLUMN contract.customer_id IS 'Идентификатор заказчика (ссылка на client)';
+COMMENT ON COLUMN contract.contractor_id IS 'Идентификатор подрядчика (ссылка на client)';
+COMMENT ON COLUMN contract.name IS 'Название контракта';
+COMMENT ON COLUMN contract.description IS 'Описание контракта';
+COMMENT ON COLUMN contract.status IS 'Статус контракта (enum: contract_status)';
+COMMENT ON COLUMN contract.reason IS 'Причина изменения статуса или отмены';
