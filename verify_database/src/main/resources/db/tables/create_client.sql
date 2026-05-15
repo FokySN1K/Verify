@@ -11,4 +11,11 @@ create table client
     constraint client_email_unique unique (email)
 );
 
-create unique index client_client_id_unique_idx on client(client_id);
+CREATE UNIQUE INDEX client_client_id_unique_idx ON client(client_id);
+
+COMMENT ON TABLE client IS 'Справочник клиентов (заказчики, подрядчики)';
+COMMENT ON COLUMN client.id IS 'Уникальный идентификатор клиента';
+COMMENT ON COLUMN client.client_id IS 'Внешний/системный идентификатор клиента';
+COMMENT ON COLUMN client.name IS 'Имя клиента';
+COMMENT ON COLUMN client.surname IS 'Фамилия клиента';
+COMMENT ON COLUMN client.email IS 'Электронная почта (уникальная)';

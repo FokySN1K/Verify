@@ -17,3 +17,14 @@ create table xml
 );
 
 create index xml_contract_id_idx on xml(contract_id);
+
+COMMENT ON TABLE xml IS 'Хранилище XML-документов и результатов валидации';
+COMMENT ON COLUMN xml.id IS 'Уникальный идентификатор XML-документа';
+COMMENT ON COLUMN xml.name IS 'Имя/название документа';
+COMMENT ON COLUMN xml.contract_id IS 'Привязка к контракту';
+COMMENT ON COLUMN xml.xsd_id IS 'Привязка к схеме валидации (XSD)';
+COMMENT ON COLUMN xml.status IS 'Статус валидации (enum: xml_status)';
+COMMENT ON COLUMN xml.version IS 'Версия документа';
+COMMENT ON COLUMN xml.data IS 'Содержимое XML-документа';
+COMMENT ON COLUMN xml.reason IS 'Причина ошибки или комментарий к статусу';
+COMMENT ON COLUMN xml.created_ts IS 'Дата и время создания записи';
