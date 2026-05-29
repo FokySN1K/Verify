@@ -1,10 +1,10 @@
 
 # Verify
 
-Сервис автоматизированной валидации XML-файлов по XSD-схемам.
-Для пользвателей существуют две роли: заказчик и подрядчик. Сервис предоставляет обеим сторонам удобный функционал соответсвующий их ролям.
+Verify - сервис автоматизированной валидации XML-файлов по XSD-схемам.
+Для пользвателей существуют две роли: заказчик и подрядчик. Сервис предоставляет обеим сторонам удобный функционал, соответсвующий их ролям, позволяющий валидировать XML-файлов и отслеживать их статус.
 
-## 🚀 Быстрый старт
+## Cтарт
 
 ```bash
 # 1. Настройка окружения
@@ -20,7 +20,7 @@ docker compose up -d
 - 📚 **Swagger UI**: http://localhost:8080/swagger-ui.html
 - 🐘 **PostgreSQL**: localhost:5432
 
-## 🔌 API Endpoints
+## API Endpoints
 
 | Метод | Эндпоинт | Описание |
 |-------|----------|----------|
@@ -29,31 +29,9 @@ docker compose up -d
 | `POST` | `/create_client` | Регистрация нового клиента |
 | `POST` | `/get_xsd_light_list` | Получение списка доступных XSD-схем |
 
-### Пример запроса `/validate_with_xsd_data`
+Подробное описание API см. wiki
 
-```json
-{
-  "xml": "<root><field>value</field></root>",
-  "xsd": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">...</xs:schema>"
-}
-```
-
-### Пример ответа
-
-```json
-{
-  "isValid": false,
-  "errors": [
-    {
-      "line": 3,
-      "column": 12,
-      "message": "cvc-type.3.1.3: The value 'value' of element 'field' is not valid."
-    }
-  ]
-}
-```
-
-## ⚙️ Переменные окружения
+## Переменные окружения
 
 Файл `.env` (на основе `.env.example`):
 
@@ -74,7 +52,7 @@ FRONTEND_PORT=13000
 VITE_API_BASE_URL=http://localhost:8080
 ```
 
-## 🛠️ Разработка и отладка
+## Разработка и отладка
 
 ```bash
 # Пересборка и перезапуск контейнеров
@@ -91,16 +69,8 @@ docker compose down
 docker compose down -v
 ```
 
-## 📦 Технологический стек
 
-| Компонент | Технологии |
-|-----------|-----------|
-| **Backend** | Spring Boot 4.0.5, Java 25, PostgreSQL, Liquibase |
-| **Frontend** | React 18, Vite, TailwindCSS 4 |
-| **Валидация** | `javax.xml.validation` (W3C XML Schema) |
-| **Инфраструктура** | Docker Compose, Maven |
-
-## ⚠️ Важно
+## Важно
 
 - Валидатор поддерживает только стандарт **W3C XML Schema**.
 - Ошибки валидации возвращаются с указанием строки, колонки и описания проблемы.
